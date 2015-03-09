@@ -1,0 +1,11 @@
+<% @count = 0 %>
+<table>
+	<% for @recarea in @recareas %>
+	<% @count += 1 %>
+		<tr>
+			<td><%= @recarea['RecAreaName'] %></td>
+			<td><a href="<%= @recarea['RecAreaReservationURL'] %>"><%= @recarea['RecAreaReservationURL'] %></a></td>
+		</tr>
+	<% end %>
+</table>
+<h3><%= @count %></h3>
