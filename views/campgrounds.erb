@@ -1,0 +1,11 @@
+<% @count = 0 %>
+<table>
+    <% for @campground in @campgrounds %>
+    <% @count += 1 %>
+        <tr>
+            <td><%= @campground['FacilityName'] %></td>
+            <td><a href="/facility/<%= @campground['FacilityID'] %>/campsites">Campsites</a></td>
+        </tr>
+    <% end %>
+</table>
+<h3><%= @count %></h3>
