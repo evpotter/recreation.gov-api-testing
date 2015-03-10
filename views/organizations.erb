@@ -2,6 +2,7 @@
 	<% for @org in @orgs %>
 		<tr>
 			<td><%= @org['OrgName'] %></td>
+            <td><a href="/organization/<%= @org['OrgID'] %>/recareas">Rec Areas</a></td>
 			<td><a href="<%= @org['OrgURLAddress'] %>"><%= @org['OrgURLAddress'] %></a></td>
 		</tr>
 	<% end %>

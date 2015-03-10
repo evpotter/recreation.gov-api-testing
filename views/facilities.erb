@@ -1,0 +1,10 @@
+<% @count = 0 %>
+<table>
+    <% for @facility in @facilities %>
+    <% @count += 1 %>
+        <tr>
+            <td><%= @facility['FacilityName'] %></td>
+        </tr>
+    <% end %>
+</table>
+<h3><%= @count %></h3>

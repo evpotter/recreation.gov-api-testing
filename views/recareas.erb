@@ -4,6 +4,7 @@
 	<% @count += 1 %>
 		<tr>
 			<td><%= @recarea['RecAreaName'] %></td>
+            <td><a href="/recarea/<%= @recarea['RecAreaID'] %>/facilities">Facilities</a></td>
 			<td><a href="<%= @recarea['RecAreaReservationURL'] %>"><%= @recarea['RecAreaReservationURL'] %></a></td>
 		</tr>
 	<% end %>
