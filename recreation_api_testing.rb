@@ -3,6 +3,36 @@ require 'sass'
 require 'rest_client'
 require 'json'
 
+class Campsite
+  include Comparable
+
+  attr :name
+
+  def <=>(otherCampsite)
+    if name.to_i.is_a? Numeric
+      if otherCampsite.name.to_i.is_a? Numeric
+        name.to_i <=> otherCampsite.name.to_i
+      else
+        return true
+      end
+    else
+      if otherCampsite.name.to_i.is_a? Numeric
+        return false
+      else
+        name.to_s <=> otherCampsite.name.to_s
+      end
+    end
+  end
+
+  def initialize(name)
+    @name = name
+  end
+
+  def inspect
+    name
+  end
+end
+
 configure do
 	set :headers, { 'apikey' => '07A6ED14D7D44A058DAC1081BF48D336' }
 end
@@ -72,7 +102,8 @@ get '/facility/:facilityId/campsites' do |facilityId|
 	res = RestClient.get url, settings.headers
 
 	res_ruby = JSON.parse res.body
-	@campsites = res_ruby['RECDATA'].sort_by { |campsite| campsite['CampsiteName'].to_s }
+  @campsites = res_ruby['RECDATA'].map { |campsite| Campsite.new(campsite['CampsiteName']) }
+  @campsites.sort!
 	erb :campsites
 end
 

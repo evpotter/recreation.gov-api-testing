@@ -3,7 +3,7 @@
     <% for @campsite in @campsites %>
     <% @count += 1 %>
         <tr>
-            <td><%= @campsite['CampsiteName'] %></td>
+            <td><%= @campsite.name %></td>
         </tr>
     <% end %>
 </table>
