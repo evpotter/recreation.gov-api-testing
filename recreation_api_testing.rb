@@ -27,10 +27,6 @@ class Campsite
   def initialize(name)
     @name = name
   end
-
-  def inspect
-    name
-  end
 end
 
 configure do
@@ -102,8 +98,7 @@ get '/facility/:facilityId/campsites' do |facilityId|
 	res = RestClient.get url, settings.headers
 
 	res_ruby = JSON.parse res.body
-  @campsites = res_ruby['RECDATA'].map { |campsite| Campsite.new(campsite['CampsiteName']) }
-  @campsites.sort!
+  @campsites = res_ruby['RECDATA'].map { |campsite| Campsite.new(campsite['CampsiteName']) }.sort!
 	erb :campsites
 end
 
