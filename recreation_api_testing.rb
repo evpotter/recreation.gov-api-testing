@@ -2,7 +2,8 @@ require 'sinatra'
 require 'sass'
 require 'rest_client'
 require 'json'
-require './campsite'
+require './lib/campsite'
+require './lib/campground'
 
 configure do
 	set :headers, { 'apikey' => '07A6ED14D7D44A058DAC1081BF48D336' }
@@ -64,7 +65,7 @@ get '/recarea/:recareaId/campgrounds' do |recareaId|
 	res = RestClient.get url, header
 
 	res_ruby = JSON.parse res.body
-	@campgrounds = res_ruby['RECDATA'].sort_by { |facility| facility['FacilityName'] }
+	@campgrounds = res_ruby['RECDATA'].map { |facility| Campground.new facility['FacilityID'], facility['FacilityName'], facility['FacilityLongitude'], facility['FacilityLatitude'] }.sort!
 	erb :campgrounds
 end
 
