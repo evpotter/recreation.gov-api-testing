@@ -6,7 +6,8 @@ require './lib/campsite'
 require './lib/campground'
 
 configure do
-	set :headers, { 'apikey' => '07A6ED14D7D44A058DAC1081BF48D336' }
+  header_hash = { :apikey => '07A6ED14D7D44A058DAC1081BF48D336' }
+	set :headers, header_hash
 end
 
 get '/' do
@@ -61,7 +62,7 @@ end
 get '/recarea/:recareaId/campgrounds' do |recareaId|
 	url = "https://ridb.recreation.gov/api/v1/recareas/#{recareaId}/facilities/"
 	header = settings.headers
-	header['params'] = { 'query' => "campground" }
+	header['params'] = { :query => 'campground' }
 	res = RestClient.get url, header
 
 	res_ruby = JSON.parse res.body
